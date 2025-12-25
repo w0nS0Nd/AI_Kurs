@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>ToDo List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+    }
+    .todo-app {
+      background: #fff;
+      padding: 20px;
+      width: 300px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+    button {
+      width: 100%;
+      padding: 8px;
+      cursor: pointer;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+    }
+    li.completed span {
+      text-decoration: line-through;
+      color: gray;
+    }
+    li span {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="todo-app">
+    <h2>ToDo List</h2>
+    <input type="text" id="taskInput" placeholder="Нове завдання" />
+    <button onclick="addTask()">Додати</button>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    function addTask() {
+      const input = document.getElementById('taskInput');
+      const text = input.value.trim();
+
+      if (text === '') return;
+
+      const li = document.createElement('li');
+      const span = document.createElement('span');
+      const delBtn = document.createElement('button');
+
+      span.textContent = text;
+      span.onclick = () => li.classList.toggle('completed');
+
+      delBtn.textContent = '✖';
+      delBtn.onclick = () => li.remove();
+
+      li.appendChild(span);
+      li.appendChild(delBtn);
+      document.getElementById('taskList').appendChild(li);
+
+      input.value = '';
+    }
+  </script>
+</body>
+</html>
